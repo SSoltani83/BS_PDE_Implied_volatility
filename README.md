@@ -1,6 +1,5 @@
 # BS_PDE_Implied_volatility
 This C++ program calculates the prices of european options (put and calls) using the Black&Scholes Merton Formulae.
-
 This program also estimates the implied volatility of the underlying assets using the observed market prices of the derivatives (puts or calls).
 This program consists of three classes structured as following:
 One absract virtual class called option. This class holds all the data members and helper functions such as the Normal CDF estimator or commonly shared function such as the vega.
