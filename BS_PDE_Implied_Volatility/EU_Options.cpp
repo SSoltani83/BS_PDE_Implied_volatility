@@ -29,6 +29,10 @@ double Option::Vega()const
 	double d=d1();
 	return (Underlying_asset_price*exp(-Dividend*(T-t))*sqrt(T-t)/sqrt(2*M_PI))*exp(-d*d/2);
 }
+Option::~Option()
+{
+cout<<"Virtual destructor called"<<endl;
+}
 
 //approximation of the Normal distribution CDF using simpson rule
 double Option::Cum_Dist_Normal(double x)const

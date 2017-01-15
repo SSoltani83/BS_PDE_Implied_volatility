@@ -34,6 +34,7 @@ protected:
 	//Cum_Dist_Normal Poly based approximation of the Normal CDF function
 	double Cum_Dist_Normal(double)const;
 	//This functions help in computing the implied volatility
+	virtual ~Option();
 	double d1(double)const;
 	double d2(double)const;
 	//This is the derivative of BS Call with respect to volatility
