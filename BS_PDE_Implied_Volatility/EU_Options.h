@@ -34,7 +34,7 @@ protected:
 	//Cum_Dist_Normal Poly based approximation of the Normal CDF function
 	double Cum_Dist_Normal(double)const;
 	//This functions help in computing the implied volatility
-	virtual ~Option();
+
 	double d1(double)const;
 	double d2(double)const;
 	//This is the derivative of BS Call with respect to volatility
@@ -42,6 +42,15 @@ protected:
 	
 public:
 	//This class does not need a constructor or destructor because it is a pure abstract class 
+	
+	//Default Constructor
+	Option();
+	//Copy Constructor
+	Option (const Option& source);
+	//Constructor with arguments
+	Option (double,double,double,double,double,double,double);
+	//Virtual destructor
+	virtual ~Option();
 	//Getter functions
 	//Underlying
 	double Get_Underlying_price()const{return Underlying_asset_price;};
@@ -89,7 +98,7 @@ public:
 	//copy constructor call
 	Call(const Call &C);
 	//destructor
-	~Call();
+	virtual ~Call();
 	
 	//Getter for Observed Price
 	double Get_Observed_price()const{return Observed_price_of_Call_derivative;};
@@ -126,7 +135,7 @@ public:
 	//Copy constructor
 	Put(const Put &P);
 	//destructor
-	~Put();
+	virtual ~Put();
 	//Getter for Observed Price
 	double Get_Observed_price()const {return Observed_price_of_Put_derivative;};
 	//setter for Observed price

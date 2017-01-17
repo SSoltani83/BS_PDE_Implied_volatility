@@ -11,7 +11,27 @@
 using namespace std;
 
 //Base Class EU_options
+//Constructor
+Option::Option():Underlying_asset_price(0),Dividend(0),Strike_price(0),Sigma(0),Risk_free_rate(0),t(0),T(0) //Colon Syntax
+{
+	cout<<"An instance of Option class is being created"<<endl;
+}
+//constructor with Arguments
+Option::Option(double p,double d, double strike, double sig, double r, double present, double maturity):Underlying_asset_price(p),Dividend(d),Strike_price(strike),Sigma(sig),Risk_free_rate(r),t(present),T(maturity)
+{
+	cout<<"An instance of Option class is being created"<<endl;
+}
+//Copy Constructor
+Option::Option(const Option& source):Underlying_asset_price(source.Underlying_asset_price),Dividend(source.Dividend),Strike_price(source.Strike_price),Sigma(source.Sigma),Risk_free_rate(source.Risk_free_rate),t(source.t),T(source.T)
+{
+	cout<<"Copy of base Option Class instance is being created"<<endl;
+}
 
+//Implementation of destructor
+Option::~Option()
+{
+cout<<"Virtual destructor called"<<endl;
+}
 //Implementation for calculating d1=d+;
 double Option::d1()const
 {
@@ -29,10 +49,7 @@ double Option::Vega()const
 	double d=d1();
 	return (Underlying_asset_price*exp(-Dividend*(T-t))*sqrt(T-t)/sqrt(2*M_PI))*exp(-d*d/2);
 }
-Option::~Option()
-{
-cout<<"Virtual destructor called"<<endl;
-}
+
 
 //approximation of the Normal distribution CDF using simpson rule
 double Option::Cum_Dist_Normal(double x)const
@@ -74,44 +91,19 @@ double Option::Vega_IV(double x)const
 
 //Derived call class
 //Default Constructor
-Call::Call()
+Call::Call():Option(),Observed_price_of_Call_derivative(0)
 {
-	Underlying_asset_price=0;
-	Dividend=0;
-	Strike_price=0;
-	Sigma=0;
-	Risk_free_rate=0;
-	t=0;
-	T=0;
-	Observed_price_of_Call_derivative=0;
 	cout<<"A call object is being created!"<<endl;
 }
 //Constructor with initialization
-Call::Call(double p,double d, double strike, double sig, double r, double present, double maturity,double O)
+Call::Call(double p,double d, double strike, double sig, double r, double present, double maturity,double O):Option(p,d,strike,sig,r,present,maturity),Observed_price_of_Call_derivative(O)
 {
-	Underlying_asset_price=p;
-	Dividend=d;
-	Strike_price=strike;
-	Sigma=sig;
-	Risk_free_rate=r;
-	t=present;
-	T=maturity;
-	Observed_price_of_Call_derivative=O;
-	cout<<"A call object is being created!"<<endl;
-	
+	cout<<"A call Instance is being created"<<endl;
 }
 
 //Copy constructor
-Call::Call(const Call &p)
+Call::Call(const Call& source):Option(source),Observed_price_of_Call_derivative(source.Observed_price_of_Call_derivative)
 {
-	Underlying_asset_price=p.Underlying_asset_price;
-	Dividend=p.Dividend;
-	Strike_price=p.Strike_price;
-	Sigma=p.Sigma;
-	Risk_free_rate=p.Risk_free_rate;
-	t=p.t;
-	T=p.T;
-	
 	cout<<"A copy instance of a call object is being created!."<<endl;
 }
 
@@ -167,36 +159,20 @@ double Call::Delta()const
  
  //Derived Put class
  //default constructor
- Put::Put()
- {
-	Underlying_asset_price=0;
-	Dividend=0;
-	Strike_price=0;
-	Sigma=0;
-	Risk_free_rate=0;
-	t=0;
-	T=0;
-	Observed_price_of_Put_derivative=0;
+Put::Put():Option(),Observed_price_of_Put_derivative(0)  //Colon notation
+{
+
 	cout<<"A put object is being created!"<<endl; 
-	
 }
  
  //Constructor that initializes the member data
- Put::Put(double p, double d, double strike, double sig, double r, double present, double maturity,double O)
+Put::Put(double p, double d, double strike, double sig, double r, double present, double maturity,double O):Option(p,d,strike,sig,r,present,maturity),Observed_price_of_Put_derivative(O)
 {
-	Underlying_asset_price=p;
-	Dividend=d;
-	Strike_price=strike;
-	Sigma=sig;
-	Risk_free_rate=r;
-	t=present;
-	T=maturity;
-	Observed_price_of_Put_derivative=O;
 	cout<<"A put object is being created!"<<endl;
- }
+}
 
  //Copy constructor
- Put::Put(const Put &P)
+Put::Put(const Put &P):Option(P),Observed_price_of_Put_derivative(P.Observed_price_of_Put_derivative)
  {
 	 cout<<"A put Object is being deleted!"<<endl;
  }
