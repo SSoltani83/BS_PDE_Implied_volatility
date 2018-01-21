@@ -51,7 +51,7 @@ double Option::Vega()const
 }
 
 
-//approximation of the Normal distribution CDF using simpson rule
+//approximation of the Normal distribution CDF using Poly base approximation
 double Option::Cum_Dist_Normal(double x)const
 {
 	 double z=abs(x);
