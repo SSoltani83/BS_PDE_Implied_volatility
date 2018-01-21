@@ -31,7 +31,7 @@ protected:
 	//private Member functions
 	double d1()const;
 	double d2()const;
-	//Cum_Dist_Normal Poly based approximation of the Normal CDF function
+	//Cum_Dist_Normal Sharp Polya-based approximation of the Normal CDF function
 	double Cum_Dist_Normal(double)const;
 	//This functions help in computing the implied volatility
 
